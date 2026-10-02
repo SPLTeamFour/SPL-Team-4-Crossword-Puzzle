@@ -1,0 +1,107 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><title>SPL Team 4 Crossword Puzzle</title>
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<style>
+:root{box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px);--bg1:#5cc8ff;--bg2:#ffeec2;--ink:#14143a;--win:#ececf8;--cell:#fff;--hl:#fff3a8;--sel:#ffd23f;--empty:#e6e9f7}
+@media (prefers-color-scheme:dark){:root:not([data-theme=light]){--bg1:#12214a;--bg2:#2a2350;--ink:#e8e8ff;--win:#23254d;--cell:#f4f4ff;--empty:#1b1d3d}}
+:root[data-theme=dark]{--bg1:#12214a;--bg2:#2a2350;--ink:#e8e8ff;--win:#23254d;--cell:#f4f4ff;--empty:#1b1d3d}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+*{box-sizing:border-box}body{margin:0;min-height:100vh;background:linear-gradient(var(--bg1),var(--bg2));font-family:"Courier New",ui-monospace,monospace;color:var(--ink);padding:10px 10px 30px}
+.win{background:var(--win);border:2px solid #14143a;box-shadow:4px 4px 0 #14143a;margin:0 auto 12px;max-width:900px}
+.tb{background:#ff5fa2;color:#fff;font-weight:bold;font-size:12px;padding:3px 8px}
+.win .in{padding:10px}h1{margin:0;text-align:center;font-size:clamp(15px,4.5vw,26px);text-shadow:2px 2px #ff5fa2}
+.sub{text-align:center;font-size:12px;margin-top:4px}
+.bar{display:flex;flex-wrap:wrap;gap:6px;align-items:center;justify-content:center;margin-top:8px}
+button{font:inherit;font-weight:bold;font-size:12px;padding:6px 10px;background:#ffe45e;color:#14143a;border:2px solid #14143a;box-shadow:2px 2px 0 #14143a;cursor:pointer}button:active{transform:translate(2px,2px);box-shadow:none}
+.stat{font-weight:bold;font-size:13px;padding:0 6px}
+#cur{background:#14143a;color:#fff;padding:7px 10px;font-size:13px;min-height:34px;margin-bottom:8px}
+#gw{overflow-x:auto;padding-bottom:4px}
+#g{display:grid;margin:0 auto;width:max-content;background:var(--empty);border:2px solid #14143a;box-shadow:3px 3px 0 #14143a}
+.c{position:relative;display:flex;align-items:center;justify-content:center;font-weight:bold;user-select:none}
+.f{background:var(--cell);border:1px solid #14143a;color:#14143a;cursor:pointer}
+.f.h{background:var(--hl)}.f.s{background:var(--sel)}.f.bad{color:#d02020;background:#ffd0d0}.f.ok{box-shadow:inset 0 0 0 2px #3bb54a}
+.n{position:absolute;top:0;left:0;font-size:.32em;line-height:1;padding:1px;font-weight:bold;color:#14143a}
+#cl{display:grid;grid-template-columns:1fr 1fr;gap:12px}@media(max-width:560px){#cl{grid-template-columns:1fr}}
+h2{font-size:13px;margin:0 0 4px}.cs{max-height:260px;overflow-y:auto;font-size:12px;font-family:Arial,sans-serif}
+.cs div{display:flex;gap:6px;padding:3px;cursor:pointer;align-items:center}.cs div:hover,.cs .a{background:var(--hl);color:#14143a}.cs .d{text-decoration:line-through;opacity:.55}
+.b{flex:none;min-width:20px;text-align:center;font-weight:bold;border:1px solid #14143a;border-radius:3px;font-size:10px;color:#14143a}
+.lg{display:flex;flex-wrap:wrap;gap:4px 12px;font-size:11px;justify-content:center;margin-top:8px}.lg i{display:inline-block;width:10px;height:10px;border:1px solid #14143a;margin-right:4px}
+#win{display:none;text-align:center;font-size:16px;padding:12px;background:#7ccf6e;color:#14143a;border:2px solid #14143a;margin-top:10px;font-weight:bold}
+#g{position:relative}#hi{position:absolute;opacity:0;left:0;top:0;width:20px;height:20px;font-size:16px;border:0;padding:0;pointer-events:none}
+button{min-height:38px}button.sm{padding:6px 12px}.nav{display:flex;gap:6px;align-items:center;background:#14143a;color:#fff;padding:5px;margin-bottom:8px}.nav{height:66px;overflow:hidden;position:sticky;top:0;z-index:5;box-shadow:0 3px 0 rgba(0,0,0,.35)}.nav span{flex:1;font-size:14px;line-height:1.3;padding:2px 4px}.nav button{background:#fff}
+#pb{height:10px;border:2px solid #14143a;background:var(--empty);margin-top:8px}#pbi{height:100%;width:0;background:#3bb54a;transition:width .3s}
+.chk{font-size:12px;display:flex;align-items:center;gap:4px;font-weight:bold}.chk input{width:18px;height:18px}
+#md{position:fixed;inset:0;background:rgba(10,10,40,.7);display:none;align-items:center;justify-content:center;padding:14px;z-index:9}#md.on{display:flex}
+#md .win{margin:0;max-width:460px;max-height:90vh;overflow:auto}#md li{margin:6px 0;font-size:14px;font-family:Arial,sans-serif}
+button:focus-visible,.f:focus-visible{outline:3px solid #ff5fa2;outline-offset:1px}
+</style></head><body><div id="md" class="on"><div class="win"><div class="tb">how_to_play.txt</div><div class="in"><h1 style="font-size:20px">How to play</h1><ol><li><b>Tap a cell</b> or a clue to start. Tap the same cell again to switch between across and down.</li><li><b>Type letters.</b> On a phone the keyboard opens when you tap a cell.</li><li>Use <b>&#9664; &#9654;</b> above the grid to jump between clues.</li><li>Stuck? Press <b>Hint</b> for one letter or <b>Reveal word</b>.</li><li>Press <b>Check</b> to mark wrong letters in red, or tick <b>Show mistakes as I type</b>.</li><li>Use <b>+ / &minus;</b> to zoom the grid. Your progress saves automatically.</li></ol><div class="bar"><button id="go">Start playing</button></div></div></div></div>
+<div class="win"><div class="tb">History</div><div class="in"><h1>HISTORY OF COMPUTER PROGRAMMING</h1>
+<div class="sub">From the abacus to the qubit &mdash; by <span id="au"></span></div>
+<div class="bar"><button id="chk">Check</button><button id="hn">Hint (1 letter)</button><button id="rw">Reveal word</button><button id="zo" class="sm" aria-label="Zoom out">&minus;</button><button id="zi" class="sm" aria-label="Zoom in">+</button><button id="hp">? Help</button></div>
+<div class="bar"><label class="chk"><input type="checkbox" id="ac">Show mistakes as I type</label><button id="th">Theme</button><button id="rs">Restart</button><button id="ra">Reveal all</button><span class="stat" id="tm">0:00</span><span class="stat" id="pr"></span></div><div id="pb"><div id="pbi"></div></div>
+<div class="lg" id="lg"></div></div></div>
+<div class="win"><div class="tb">Puzzle</div><div class="in"><div class="nav"><button id="pv" aria-label="Previous clue">&#9664;</button><span id="ct" aria-live="polite"></span><button id="nx" aria-label="Next clue">&#9654;</button></div><div id="gw"><div id="g"></div></div><input id="hi" autocapitalize="characters" autocomplete="off" autocorrect="off" spellcheck="false"><div id="win">You solved it! Time: <span id="wt"></span></div></div></div>
+<div class="win"><div class="tb">Clues</div><div class="in" id="cl"><div><h2>ACROSS &gt;&gt;&gt;</h2><div class="cs" id="ca"></div></div><div><h2>DOWN vvv</h2><div class="cs" id="cd"></div></div></div></div>
+<div class="win"><div class="tb">bonus_round.txt</div><div class="in"><h1 style="font-size:clamp(14px,4vw,22px)">BONUS ROUND: FILL IN THE BLANKS</h1><div class="sub">Use the answers from your crossword!</div><div id="fk" class="sub" style="font-weight:bold">&#128274; Solve the crossword to unlock this round.</div><div class="bar"><button id="fc">Check</button><button id="fr">Reveal all</button><button id="fx">Clear</button><span class="stat" id="fs"></span></div><div id="fl"></div></div></div>
+<style>#fl .s{display:flex;flex-wrap:wrap;align-items:center;gap:6px;padding:6px 4px;font:13px Arial,sans-serif;border-bottom:1px dashed #14143a55}#fl input{font:bold 13px "Courier New",monospace;text-transform:uppercase;width:170px;padding:4px 6px;border:2px solid #14143a;background:var(--cell);color:#14143a}#fl input:disabled{opacity:.45}#fl input.ok{background:#b6ecb0}#fl input.bad{background:#ffd0d0}</style>
+<script>
+(function(){const S=[["The ", "is an ancient bead tool for counting.", "ABACUS"], ["Ada ", "is known as the first programmer.", "LOVELACE"], ["The ", "loom used punch cards that inspired early computers.", "JACQUARD"], ["Alan ", "imagined a universal machine.", "TURING"], ["Charles ", "designed the Analytical Engine.", "BABBAGE"], ["", "was made for scientific work.", "FORTRAN"], ["", "is a language made for business.", "COBOL"], ["", "was made to teach structured programming.", "PASCAL"], ["", "is the language used to ask databases questions.", "SQL"], ["", "follows the idea \"write once, run anywhere\".", "JAVA"], ["", "is a memory-safe language for systems programs.", "RUST"], ["", "is Apple's fast, modern programming language.", "SWIFT"], ["", "was the first object-oriented language.", "SIMULA"], ["A ", "translates source code before the program runs.", "COMPILER"], ["Grace ", "built an early compiler and is known as Amazing Grace.", "HOPPER"], ["", "is the Swiss army chainsaw language for text.", "PERL"], ["", "is the free OS with a penguin mascot.", "LINUX"], ["The ", "is a tiny switch that replaced vacuum tubes.", "TRANSISTOR"], ["The ", "is the brain of the computer.", "CPU"], ["A ", "can be 0 and 1 at the same time.", "QUBIT"]],q=id=>document.getElementById(id),n=v=>v.toUpperCase().replace(/[^A-Z]/g,"");
+q("fl").innerHTML=S.map((x,i)=>`<div class="s"><span>${i+1}. ${x[0]}</span><input data-a="${x[2]}" autocomplete="off" spellcheck="false" aria-label="Blank ${i+1}"><span>${x[1]}</span></div>`).join("");
+const I=()=>[...q("fl").querySelectorAll("input")],B=()=>[q("fc"),q("fr"),q("fx")];
+function lock(on){I().forEach(i=>i.disabled=on);B().forEach(b=>b.disabled=on);q("fk").style.display=on?"block":"none"}
+lock(true);
+setInterval(()=>{const d=q("win").style.display==="block";if(d===I()[0].disabled)lock(!d)},400);
+q("fl").addEventListener("keydown",e=>e.stopPropagation());
+q("fl").addEventListener("input",e=>{e.target.className=""});
+q("fc").onclick=()=>{let k=0;I().forEach(i=>{const v=n(i.value);i.className=!v?"":v==i.dataset.a?"ok":"bad";if(v==i.dataset.a)k++});q("fs").textContent="SCORE: "+k+" / "+S.length};
+q("fr").onclick=()=>{I().forEach(i=>i.value=i.dataset.a);q("fc").onclick()};
+q("fx").onclick=()=>{I().forEach(i=>{i.value="";i.className=""});q("fs").textContent=""};
+})();
+</script>
+<script>
+const D={"w": [["ASSEMBLER", "Turns mnemonics into 1s and 0s", 12, 8, "A", 31, 4], ["ASSEMBLY", "Mnemonics just above machine code", 9, 15, "D", 26, 3], ["ALGORITHM", "A recipe for solving problems", 15, 14, "A", 40, 0], ["SMALLTALK", "\"Everything is an object\" language", 12, 10, "D", 32, 3], ["LOVELACE", "First programmer, Lord Byron's daughter", 5, 11, "D", 20, 1], ["RITCHIE", "Gave us C and helped build Unix", 17, 8, "A", 43, 1], ["COMPILER", "Translates a whole program at once", 8, 5, "A", 23, 4], ["TRANSISTOR", "Tiny switch that retired vacuum tubes", 10, 9, "A", 28, 2], ["NEUMANN", "Stored programs in memory with data", 14, 6, "A", 37, 1], ["HOLLERITH", "His punch cards counted the 1890 census", 5, 9, "A", 19, 1], ["PROLOG", "Programs written as facts and rules", 19, 7, "A", 49, 3], ["PASCALINE", "Gear-driven adder built by a French teen", 5, 5, "D", 18, 0], ["PASCAL", "Named for a calculator-building mathematician", 19, 7, "D", 49, 3], ["KOTLIN", "JetBrains language favored on Android", 10, 2, "A", 27, 3], ["JACQUARD", "Loom whose punch cards inspired computers", 6, 0, "A", 21, 0], ["QUBIT", "Can be 0 and 1 at once", 11, 20, "D", 30, 5], ["TORVALDS", "Penguin-loving kernel creator", 14, 17, "D", 38, 1], ["FORTRAN", "\"Formula Translation\" pioneer", 1, 1, "D", 7, 3], ["PYTHON", "Snake-named, readable, beginner-loved", 2, 17, "D", 11, 3], ["JULIA", "Speedy language for scientists", 20, 3, "A", 50, 3], ["ABACUS", "Bead-sliding calculator of ancient times", 18, 17, "A", 48, 0], ["WIRTH", "Swiss designer of Pascal", 3, 14, "D", 13, 1], ["COLOSSUS", "Helped crack Lorenz codes in WWII", 21, 13, "A", 52, 2], ["GOSLING", "Led the team that brewed Java", 18, 15, "D", 47, 1], ["HASKELL", "Purely functional and lazy by nature", 23, 6, "A", 54, 3], ["BABBAGE", "Dreamed up the Analytical Engine", 13, 18, "A", 35, 1], ["SIMULA", "Invented classes and objects in the 1960s", 17, 4, "D", 42, 3], ["TURING", "Imagined a machine that reads a tape", 8, 23, "D", 24, 1], ["ASCII", "128-character text code", 17, 22, "D", 45, 4], ["UNIVAC", "Predicted a US election in 1952", 22, 0, "A", 53, 2], ["LISP", "Parentheses everywhere! Early AI favorite", 21, 2, "D", 51, 3], ["ENIAC", "Room-sized electronic giant of the 1940s", 13, 24, "D", 36, 2], ["COBOL", "Old-school language that still moves money", 2, 0, "A", 9, 3], ["NAPIER", "Scottish inventor of calculating \"bones\"", 2, 15, "A", 10, 0], ["QUANTUM", "Computing's spooky superposition era", 17, 0, "D", 41, 5], ["HTML", "Skeleton of every web page", 4, 0, "A", 16, 3], ["NEURAL", "___ network: brain-inspired AI", 7, 17, "A", 22, 5], ["HOPPER", "\"Amazing Grace\" who built an early compiler", 9, 3, "D", 25, 1], ["SCHEME", "Tiny, elegant Lisp cousin", 13, 0, "A", 33, 3], ["BACKUS", "Led the team behind FORTRAN", 17, 19, "D", 44, 1], ["IDE", "Where coders write, run, and debug", 0, 19, "D", 5, 4], ["ALGOL", "1958 ancestor of many modern syntaxes", 3, 22, "D", 15, 3], ["LINUX", "Free OS with a penguin mascot", 4, 19, "D", 17, 4], ["UNIX", "Bell Labs OS with a big legacy", 0, 17, "A", 4, 4], ["KNUTH", "Author of the legendary \"Art\" books", 1, 9, "D", 8, 1], ["API", "How apps shake hands", 24, 1, "A", 55, 4], ["PERL", "The \"Swiss army chainsaw\" for text", 13, 7, "D", 34, 3], ["DEBUG", "Squash a moth, or any error", 3, 6, "A", 12, 4], ["SWIFT", "Apple's fast, modern language", 18, 2, "A", 46, 3], ["BASIC", "Beginner's All-purpose code", 11, 0, "D", 29, 3], ["CPU", "The computer's brain", 15, 0, "A", 39, 2], ["JAVA", "Coffee-named: write once, run anywhere", 3, 21, "A", 14, 3], ["SQL", "Ask databases questions with this", 0, 4, "D", 2, 3], ["BINARY", "The language of 0s and 1s", 0, 24, "D", 6, 4], ["BYTE", "Eight bits' worth of data", 0, 7, "D", 3, 4], ["RUST", "Memory safety without garbage collection", 0, 2, "A", 1, 3]], "e": [["ANCIENT ROOTS", "#f2b84b"], ["PIONEERS", "#7ccf6e"], ["MACHINES", "#f28b6b"], ["LANGUAGES", "#6fb4f2"], ["TOOLS & TERMS", "#b79af0"], ["FUTURE", "#f58fd0"]], "a": ["Riza Mae B. Galpao", "Jamilla Kate C. Vailoces", "Lubang Eugene A. Yocogan"]},N=25,COL=D.e.map(e=>e[1]),W=D.w.map(([a,c,r,cc,d,n,e],i)=>({a,c,r,cc,d,n,e,i,cells:[...a].map((_,k)=>d=='A'?[r,cc+k]:[r+k,cc])}));
+const M={},V={};let sel=null,dir='A',t0=Date.now(),done=false,tmr;
+W.forEach(w=>w.cells.forEach(([r,c],k)=>{const key=r*N+c;(M[key]=M[key]||{ch:w.a[k],e:w.e,n:0,w:{}}).w[w.d]=w.i;if(k==0)M[key].n=w.n}));
+const $=id=>document.getElementById(id),g=$('g'),hi=$('hi');
+$('au').textContent=D.a.join(', ');
+$('lg').innerHTML=D.e.map(e=>`<span><i style="background:${e[1]}"></i>${e[0]}</span>`).join('');
+g.appendChild(hi);const K=(r,c)=>r*N+c,els={};
+for(let r=0;r<N;r++)for(let c=0;c<N;c++){const d=document.createElement('div'),m=M[K(r,c)];d.className='c'+(m?' f':'');if(m){d.dataset.k=K(r,c);d.innerHTML=(m.n?`<span class="n" style="background:${COL[m.e]}">${m.n}</span>`:'')+'<span></span>';d.onclick=()=>pick(r,c,true)}g.appendChild(d);els[K(r,c)]=d}
+let z=1;function size(){const s=Math.round(Math.max(22,Math.min(32,Math.floor((Math.min(innerWidth,880)-50)/N)))*z);g.style.gridTemplateColumns=`repeat(${N},${s}px)`;g.style.gridAutoRows=s+'px';g.style.fontSize=(s*.62)+'px'}
+size();addEventListener('resize',size);
+const val=k=>els[k].lastChild.textContent;const setv=(k,v)=>{els[k].lastChild.textContent=v;els[k].classList.remove('bad')};
+const cw=()=>{const m=M[K(...sel)];return W[m.w[dir]]};
+function mk(cl){return`<div data-i="CI"><span class="b" style="background:COLOR">N</span>TEXT</div>`}
+['A','D'].forEach(d=>{$('c'+d.toLowerCase()).innerHTML=W.filter(w=>w.d==d).sort((a,b)=>a.n-b.n).map(w=>`<div data-i="${w.i}" id="cl${w.i}"><span class="b" style="background:${COL[w.e]}">${w.n}</span>${w.c}</div>`).join('')});
+document.querySelectorAll('.cs div').forEach(x=>x.onclick=()=>{const w=W[x.dataset.i];dir=w.d;pick(w.r,w.cc,false);{const q=hi.getBoundingClientRect();if(q.top>0&&q.bottom<innerHeight)hi.focus({preventScroll:true})}});
+function pick(r,c,click){const m=M[K(r,c)];if(click&&sel&&sel[0]==r&&sel[1]==c){const o=dir=='A'?'D':'A';if(m.w[o]!==undefined)dir=o}else if(m.w[dir]===undefined)dir=dir=='A'?'D':'A';sel=[r,c];draw();if(click)hi.focus({preventScroll:true})}
+function draw(){if(sel){const e0=els[K(...sel)];hi.style.left=e0.offsetLeft+'px';hi.style.top=e0.offsetTop+'px';const gw=$('gw'),a=gw.getBoundingClientRect(),b=els[K(...sel)].getBoundingClientRect();if(b.left<a.left)gw.scrollLeft-=a.left-b.left+10;else if(b.right>a.right)gw.scrollLeft+=b.right-a.right+10}document.querySelectorAll('.f').forEach(e=>e.classList.remove('h','s'));if(!sel)return;const w=cw();w.cells.forEach(([r,c])=>els[K(r,c)].classList.add('h'));els[K(...sel)].classList.add('s');
+document.querySelectorAll('.cs .a').forEach(e=>e.classList.remove('a'));const ce=$('cl'+w.i);ce.classList.add('a');{const p=ce.parentNode,c=ce.getBoundingClientRect(),q=p.getBoundingClientRect();if(c.top<q.top)p.scrollTop-=q.top-c.top;else if(c.bottom>q.bottom)p.scrollTop+=c.bottom-q.bottom}
+$('ct').textContent=`${w.n} ${w.d=='A'?'ACROSS':'DOWN'} (${w.a.length}): ${w.c}`}
+function step(n){const w=cw();let i=w.cells.findIndex(([r,c])=>r==sel[0]&&c==sel[1])+n;if(i>=0&&i<w.a.length)sel=w.cells[i];draw()}
+function type(ch){if(!sel||done)return;const k=K(...sel);setv(k,ch);if($('ac').checked&&ch!=M[k].ch)els[k].classList.add('bad');step(1);upd()}
+hi.addEventListener('input',()=>{const v=hi.value.toUpperCase().replace(/[^A-Z]/g,'');hi.value='';if(v)type(v.slice(-1))});
+addEventListener('keydown',e=>{if(!sel)return;if(e.key=='Backspace'){e.preventDefault();const k=K(...sel);if(val(k)){setv(k,'')}else{step(-1);setv(K(...sel),'')}upd()}
+else if(e.key.startsWith('Arrow')){e.preventDefault();const [dr,dc]={ArrowUp:[-1,0],ArrowDown:[1,0],ArrowLeft:[0,-1],ArrowRight:[0,1]}[e.key];let r=sel[0]+dr,c=sel[1]+dc;while(r>=0&&c>=0&&r<N&&c<N&&!M[K(r,c)]){r+=dr;c+=dc}if(r>=0&&c>=0&&r<N&&c<N&&M[K(r,c)]){if(dr)dir=M[K(r,c)].w.D!==undefined?'D':dir;else dir=M[K(r,c)].w.A!==undefined?'A':dir;pick(r,c,false)}}
+else if(e.key=='Tab'){e.preventDefault();const o=W.slice().sort((a,b)=>a.d==b.d?a.n-b.n:a.d<b.d?-1:1);let i=o.indexOf(cw())+(e.shiftKey?-1:1);const w=o[(i+o.length)%o.length];dir=w.d;pick(w.r,w.cc,false)}
+else if(e.key.length==1&&/[a-z]/i.test(e.key)&&!e.ctrlKey&&!e.metaKey){e.preventDefault();type(e.key.toUpperCase())}});
+const ok=w=>w.cells.every(([r,c],k)=>val(K(r,c))==w.a[k]);
+function upd(){let f=0,t=0;for(const k in M){t++;if(val(k)==M[k].ch)f++}$('pr').textContent=Math.round(f/t*100)+'% done';$('pbi').style.width=(f/t*100)+'%';W.forEach(w=>$('cl'+w.i).classList.toggle('d',ok(w)));
+if(f==t&&!done){done=true;clearInterval(tmr);$('wt').textContent=$('tm').textContent;$('win').style.display='block'}save()}
+const ord=()=>W.slice().sort((a,b)=>a.d==b.d?a.n-b.n:a.d<b.d?-1:1);
+function nav(n){if(!sel)return;const o=ord();const w=o[(o.indexOf(cw())+n+o.length)%o.length];dir=w.d;pick(w.r,w.cc,false)}
+$('pv').onclick=()=>nav(-1);$('nx').onclick=()=>nav(1);
+$('hn').onclick=()=>{if(sel&&!done){const k=K(...sel);setv(k,M[k].ch);step(1);upd()}};
+$('zo').onclick=()=>{z=Math.max(.8,z-.15);size()};$('zi').onclick=()=>{z=Math.min(1.8,z+.15);size()};
+const md=$('md');$('hp').onclick=()=>md.classList.add('on');$('go').onclick=()=>{md.classList.remove('on');try{localStorage.setItem('xwHelp','1')}catch(e){}};
+try{if(localStorage.getItem('xwHelp'))md.classList.remove('on')}catch(e){}
+function two(id,label,fn){const b=$(id);let t;b.onclick=()=>{if(b.dataset.s){clearTimeout(t);b.textContent=label;delete b.dataset.s;fn()}else{b.dataset.s=1;b.textContent='Sure? Tap again';t=setTimeout(()=>{b.textContent=label;delete b.dataset.s},2500)}}}
+$('chk').onclick=()=>{for(const k in M){const v=val(k);els[k].classList.toggle('bad',!!v&&v!=M[k].ch)}};
+$('rw').onclick=()=>{if(sel){cw().cells.forEach(([r,c],k)=>setv(K(r,c),cw().a[k]));upd()}};
+two('ra','Reveal all',()=>{for(const k in M)setv(k,M[k].ch);upd()});
+two('rs','Restart',()=>{for(const k in M)setv(k,'');done=false;t0=Date.now();$('win').style.display='none';clearInterval(tmr);tmr=setInterval(tick,1000);upd()});
+$('th').onclick=()=>{const r=document.documentElement;r.dataset.theme=(r.dataset.theme||(matchMedia('(prefers-color-scheme:dark)').matches?'dark':'light'))=='dark'?'light':'dark'};
+function tick(){const s=Math.floor((Date.now()-t0)/1000);$('tm').textContent=Math.floor(s/60)+':'+String(s%60).padStart(2,'0')}
+function save(){try{localStorage.setItem('xw',JSON.stringify(Object.keys(M).map(k=>val(k))))}catch(e){}}
+try{const s=JSON.parse(localStorage.getItem('xw')||'null');if(s)Object.keys(M).forEach((k,i)=>{if(s[i])els[k].lastChild.textContent=s[i]})}catch(e){}
+tmr=setInterval(tick,1000);upd();pick(W[0].r,W[0].cc,false);
+</script></body></html>
