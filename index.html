@@ -49,6 +49,14 @@ header{position:static;max-width:940px;margin:14px auto 0;box-sizing:border-box;
 #msg{position:sticky;top:env(safe-area-inset-top,0px);z-index:6;max-width:940px;margin:10px auto 0;box-sizing:border-box;width:calc(100% - 24px)}
 .eras{margin-top:12px}
 .sl2 b{width:auto!important;min-width:32px;padding:0 6px;box-sizing:border-box;white-space:nowrap;flex:0 0 auto}
+
+/* center everything */
+header{flex-direction:column;justify-content:center;text-align:center}
+header>div{justify-content:center}
+#pg{text-align:center}#pg .bar{margin:3px auto 0}
+#msg{text-align:center}
+.cd h3,.cb,.vl,.ban{text-align:center}
+.eras,.chips{justify-content:center}
 </style></head><body>
 <header><div><h1>HISTORY OF COMPUTER PROGRAMMING — CROSSWORD</h1><div class="au">By Jamilla Kate Vailoces · Riza Mae Galpao · Lubang Eugene Yocogan</div></div>
 <div style="display:flex;gap:10px;align-items:center"><div id="pg"></div><button id="hp">❓ How to play</button> <button id="rs">Restart Game</button></div></header>
@@ -72,7 +80,7 @@ const E=[[1,'D','LOVELACE',1,2,0,1,'First programmer'],[2,'A','PLANKALKUL',6,15,
 const CP=[['Early machines were programmed with punched ___, an idea borrowed from weaving looms.','cards'],['Programmers began replacing hand-written ___ language with high-level languages.','assembly'],['The invention of the ___ made affordable home computers possible.','microprocessor'],['The growth of the World Wide ___ created demand for new programming languages.','Web'],['Smartphones created a huge demand for mobile ___.','apps'],['Artificial ___ now helps developers write and review code.','intelligence'],['A step-by-step set of instructions for solving a problem is called an ___.','algorithm']];
 const DEC=['cables','cloud','pixels'];
 const T={
-welcome:['Welcome, programmer! 👋',`<p>Your goal: complete the <b>History of Computer Programming crossword</b>. Here is how it works:</p><ol><li><b>Checkpoint</b> (left): drag a word into the blank of each era statement. Right = the era unlocks. Wrong = the word turns red.</li><li><b>Clues</b> (right): unlocked clues appear with a 🟢 🟡 🔴 difficulty. Click a clue or a white cell, then type.</li><li><b>Gold bold cells</b> are special. Solving a word through one sends its letter to the <b>Hint Lab</b>.</li><li><b>Hint Lab</b>: a full word becomes a hint. Use it on a clue of matching difficulty to reveal letters.</li><li>You do <b>not</b> have to finish an era before unlocking the next one. Solve all 39 entries to win.</li></ol><p>The yellow-blue bar under the title always tells you what just happened. Reopen this guide any time with “How to play”.</p>`],
+welcome:['Welcome, programmer! 👋',`<p>Your goal: complete the <b>History of Computer Programming crossword</b>. Here is how it works:</p><ol><li><b>Checkpoint</b>: drag a word into the blank of each era statement. Correct = the era unlocks. Wrong = the word turns red.</li><li><b>Clues</b>: unlocked clues appear with a 🟢 🟡 🔴 difficulty. Click a clue or a white cell, then type.</li><li><b>Gold bold cells</b> are special. Solving a word through one sends its letter to the <b>Hint Lab</b>.</li><li><b>Hint Lab</b>: a full word becomes a hint. Use it on a clue of matching difficulty to reveal letters.</li><li>You do <b>not</b> have to finish an era before unlocking the next one. Solve all 39 entries to win.</li></ol><p>The yellow-blue bar under the title always tells you what just happened. Reopen this guide any time with “How to play”.</p>`],
 cp:['Mechanic: Era checkpoints',`<p>Each era has one short statement with a blank. Drag a word from the <b>word bank</b> into the blank (on a phone: tap the word, then tap the blank).</p><p>🟢 Green = correct, the era unlocks and its clues appear.<br>🔴 Red = wrong. Try another word, or tap the blank to clear it. You cannot move to the next era until it is correct.</p>`],
 era:['ERA UNLOCKED!',`<p>The clues of that era are now in the <b>Clues</b> list on the right, and their cells on the grid turned white.</p><p>You can solve them now <b>or</b> go straight to the next checkpoint. Unlocked clues stay available, so you can come back to the ones that stump you.</p>`],
 sp:['Mechanic: special letters',`<p>You just solved a word that passes through a <b>gold bold cell</b>. That letter was sent to the <b>Hint Lab</b> (right panel).</p><p>Each Hint Lab slot shows which clue gives its letter (like “3-Across”) until it is collected. Fill every slot of a hint to complete its word.</p>`],
