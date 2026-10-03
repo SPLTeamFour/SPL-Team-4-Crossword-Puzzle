@@ -1,0 +1,161 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover"><title>History of Computer Programming Crossword</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+:root{box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px);--bg:#8fd0ff;--bg2:#fff3d1;--cd:#f1f1fa;--tx:#14143a;--mu:#555a85;--ln:#14143a;--cl:#b9c0e0;--ac:#ff5fa2;--ac2:#3b4bd6;--ok:#bdf0c6;--sp:#f5b700;--lk:#cfd2e6;--bad:#ffc2d1;--sel:#ffe27a;--hl:#d8e4ff;--sh:#14143a;--px:'Press Start 2P','Courier New',monospace;--mo:'Space Mono','Courier New',monospace}
+@media (prefers-color-scheme:dark){:root:not([data-theme=light]){--bg:#10153a;--bg2:#1c1442;--cd:#1d2250;--tx:#eef0ff;--mu:#a9b0e0;--ln:#050724;--cl:#46509a;--ok:#1f6a45;--sp:#f5b700;--lk:#2a3068;--bad:#7a2848;--sel:#8a6c00;--hl:#2c3a82;--sh:#050724}}
+:root[data-theme=dark]{--bg:#10153a;--bg2:#1c1442;--cd:#1d2250;--tx:#eef0ff;--mu:#a9b0e0;--ln:#050724;--cl:#46509a;--ok:#1f6a45;--sp:#f5b700;--lk:#2a3068;--bad:#7a2848;--sel:#8a6c00;--hl:#2c3a82;--sh:#050724}
+html{scroll-padding-top:env(safe-area-inset-top,0px);min-height:100%}
+body{margin:0;min-height:100vh;background:linear-gradient(var(--bg),var(--bg2));background-attachment:fixed;color:var(--tx);font:14px/1.5 var(--mo)}
+header{margin:14px 12px 0;padding:12px 16px;display:flex;flex-wrap:wrap;gap:12px;align-items:center;justify-content:space-between;background:var(--cd);border:3px solid var(--ln);box-shadow:5px 5px 0 var(--sh)}
+h1{font:400 15px/1.5 var(--px);margin:0;color:var(--ac2);text-shadow:2px 2px 0 var(--ac)}.au{color:var(--mu);font-size:12px;margin-top:4px}
+button{font:700 12px var(--mo);border:2px solid var(--ln);background:var(--cd);color:var(--tx);padding:6px 12px;cursor:pointer;box-shadow:3px 3px 0 var(--sh);transition:transform .08s,box-shadow .08s}
+button:hover{transform:translate(1px,1px);box-shadow:2px 2px 0 var(--sh)}button:active{transform:translate(3px,3px);box-shadow:none}
+.pri{background:var(--ac);color:#fff}
+.bar{height:14px;background:var(--cd);border:2px solid var(--ln);min-width:170px;margin-top:3px}.bar i{display:block;height:100%;background:repeating-linear-gradient(90deg,var(--ac) 0 8px,#ff8fc0 8px 10px);transition:width .3s}
+#msg{margin:10px 12px 0;padding:0 4px;min-height:22px;color:var(--tx);font-weight:700}#msg:not(:empty){background:var(--sel);border:2px solid var(--ln);padding:6px 10px;box-shadow:3px 3px 0 var(--sh)}
+main{display:grid;grid-template-columns:minmax(250px,320px) auto minmax(250px,340px);gap:16px;padding:14px 12px;align-items:start;justify-content:center}
+@media(max-width:1250px){main{grid-template-columns:minmax(0,1fr)}}main>section{min-width:0}
+.cd{background:var(--cd);border:3px solid var(--ln);box-shadow:5px 5px 0 var(--sh);padding:0 12px 12px;margin-bottom:16px}
+.cd h3{margin:0 -12px 12px;padding:8px 12px;font:400 10px/1.4 var(--px);background:var(--ac);color:#fff;border-bottom:3px solid var(--ln);letter-spacing:.5px}
+.cd>b:first-child{display:block;margin-top:12px}
+.eras{display:flex;flex-wrap:wrap;gap:6px;margin:12px 0 10px}.eras span{font-size:11px;padding:2px 8px;background:var(--lk);border:2px solid var(--cl);color:var(--mu)}.eras .on{background:var(--ok);border-color:var(--ln);color:var(--tx)}.eras .cur{border-color:var(--ac2);box-shadow:0 0 0 2px var(--ac2)}
+.st{margin:10px 0;line-height:2}.bl{display:inline-block;min-width:96px;border-bottom:3px dashed var(--ac2);text-align:center;padding:0 6px;cursor:pointer;font-weight:700;background:var(--hl)}.bl.f{background:var(--ok);border-bottom:3px solid #1f9d55}
+.chips{display:flex;flex-wrap:wrap;gap:8px;margin-top:10px}.chip{padding:3px 10px;background:var(--sel);border:2px solid var(--ln);box-shadow:2px 2px 0 var(--sh);cursor:grab;user-select:none;font-weight:700}.chip.p{background:var(--ac);color:#fff}
+.ban{background:var(--ok);border:2px solid var(--ln);padding:8px 10px;margin:12px 0 8px;font-weight:700}
+#gw{overflow:auto;max-width:100%;padding:12px 0}
+#g{display:grid;grid-template-columns:repeat(25,28px);grid-auto-rows:28px;gap:0;width:max-content;margin:auto}
+.c{position:relative;display:flex;align-items:center;justify-content:center;font:700 15px var(--mo);background:#fff;color:#14143a;border:1px solid var(--ln);margin:0 -1px -1px 0;cursor:pointer}
+.c.e{visibility:hidden}.c.lk{background:var(--lk);cursor:not-allowed;color:transparent;border-color:var(--cl)}.c.hl{background:var(--hl)}.c.sl{background:var(--sel);z-index:2;box-shadow:inset 0 0 0 2px var(--ac2)}.c.ok{background:var(--ok)}.c.bd{background:var(--bad)}
+.c.sp{box-shadow:inset 0 0 0 3px var(--sp);font-weight:900}.c.sp.sl{box-shadow:inset 0 0 0 3px var(--sp),inset 0 0 0 5px var(--ac2)}.c.rv{color:var(--ac2)}
+.c small{position:absolute;left:2px;top:0;font-size:8px;font-weight:700;color:var(--ac2)}
+.vl{font-size:12px;color:var(--mu);margin-top:8px}.vl button{margin-top:10px}
+.hc{border:2px solid var(--ln);background:var(--bg2);padding:6px 8px;margin-bottom:8px}.sl2{display:flex;flex-wrap:wrap;gap:3px;margin:3px 0}.sl2 b{width:22px;height:24px;border:2px solid var(--sp);background:#fff;color:#14143a;display:inline-flex;align-items:center;justify-content:center;font-family:var(--mo)}
+.er{font:400 9px/1.6 var(--px);margin:14px 0 6px;padding-bottom:4px;border-bottom:2px solid var(--ln)}.cl{display:flex;gap:6px;align-items:baseline;padding:4px 6px;cursor:pointer;border-left:4px solid transparent}.cl:hover{background:var(--hl);border-left-color:var(--ac2)}.cl.s{background:var(--ok);text-decoration:line-through;opacity:.75}.cl.on{background:var(--sel);border-left-color:var(--ac)}
+.df{font-size:10px;white-space:nowrap;border:2px solid var(--cl);padding:0 4px}
+#md,#pop{position:fixed;inset:0;background:#000b;display:none;align-items:center;justify-content:center;z-index:9;padding:12px}#md div,#pop>div{background:var(--cd);border:3px solid var(--ln);box-shadow:6px 6px 0 var(--sh);padding:24px;max-width:380px;text-align:center}#pop>div{text-align:left;max-height:90vh;overflow:auto;max-width:460px}#pop h2{margin-top:0}#pop button{margin-top:8px}#md h2,#pop h2{font:400 14px/1.6 var(--px);color:var(--ac2)}
+.cb{padding:8px 10px;margin:12px 0 0;background:var(--sel);border:2px solid var(--ln);font-weight:700;min-height:20px}
+.st.fut{opacity:.5}.st.act{border-left:4px solid var(--ac);padding-left:8px}.st small{color:var(--mu);font-weight:700}
+.bl.bad,.chip.bad{background:var(--bad);color:#b00020;border-color:#d32f2f}.bl.lkd{border-bottom:3px solid var(--ln);cursor:default;background:none}
+.sl2 b{min-width:30px;height:28px;font-size:10px;color:var(--mu)}.sl2 b.f{background:var(--sp);color:#000;font-size:14px}.cl.el{outline:2px dashed var(--sp);background:var(--hl)}
+footer{text-align:center;color:var(--tx);font-size:12px;padding:6px 12px 20px;font-weight:700}
+
+/* layout: single centered column, stacked like windows: fill-in-the-blanks -> crossword -> clues & hint lab */
+main{display:flex!important;flex-direction:column;gap:0;max-width:964px;margin:0 auto;padding:16px 12px;box-sizing:border-box}
+main>section{min-width:0;width:100%;position:static!important;max-height:none!important;overflow:visible!important;padding:0!important}
+#L{order:1}main>section:nth-child(2){order:2}#R{order:3;display:flex;flex-direction:column}
+#R>.cd{flex-shrink:0}#R>.cd:nth-child(2){order:-1;max-height:70vh;overflow:auto;padding-bottom:12px}
+#R>.cd:nth-child(2)>h3{position:sticky;top:0;z-index:2}
+header{position:static;max-width:940px;margin:14px auto 0;box-sizing:border-box;width:calc(100% - 24px)}
+#msg{position:sticky;top:env(safe-area-inset-top,0px);z-index:6;max-width:940px;margin:10px auto 0;box-sizing:border-box;width:calc(100% - 24px)}
+.eras{margin-top:12px}
+.sl2 b{width:auto!important;min-width:32px;padding:0 6px;box-sizing:border-box;white-space:nowrap;flex:0 0 auto}
+</style></head><body>
+<header><div><h1>HISTORY OF COMPUTER PROGRAMMING — CROSSWORD</h1><div class="au">By Jamilla Kate Vailoces · Riza Mae Galpao · Lubang Eugene Yocogan</div></div>
+<div style="display:flex;gap:10px;align-items:center"><div id="pg"></div><button id="hp">❓ How to play</button> <button id="rs">Restart Game</button></div></header>
+<div id="msg"></div>
+<main><section id="L"></section><section><div class="cd"><div id="cb" class="cb"></div><div id="gw"><div id="g"></div></div><div class="vl">Unlock era → solve or continue → unlock next era → complete the whole crossword. Colors: <b>gold bold</b> = special cell (its letter goes to the Hint Lab) · green = solved · red = wrong (after Check) · blue letters = revealed by a hint · grey = locked era. Click a selected cell again to switch Across/Down.<br><button id="ck">Check my letters</button></div></div></section><section id="R"></section></main>
+<footer>Puzzle by Team 4 · Jamilla Kate Vailoces, Riza Mae Galpao, Lubang Eugene Yocogan</footer>
+<div id="pop"></div><input id="hi" style="position:fixed;left:-99px;top:0;opacity:0" autocomplete="off" autocapitalize="characters">
+<div id="md"><div><h2>🎉 CROSSWORD COMPLETE!</h2><p>You have successfully traveled through the history of computer programming and completed the puzzle!</p><p><b>All eras unlocked. All clues solved.</b></p><button class="pri" onclick="dm=1;R()">Close</button></div></div>
+<script>
+const ER=['Before 1950','1950–1970','1970–1985','1985–2000','2000–2015','2015–Present','Legacy & Programming Concepts'];
+const DF=['','🟢 SIMPLE','🟡 MODERATE','🔴 DIFFICULT'];
+// [num,dir,answer,row,col,era,difficulty,clue]
+const E=[[1,'D','LOVELACE',1,2,0,1,'First programmer'],[2,'A','PLANKALKUL',6,15,0,3,'First high-level language'],[3,'A','TURING',12,17,0,1,'Universal machine theorist'],[4,'A','BABBAGE',12,0,0,1,'Analytical Engine designer'],[5,'A','ENIAC',3,17,0,2,'Early electronic computer'],
+[20,'A','FORTRAN',2,1,1,1,'Scientific programming language'],[21,'D','LISP',8,11,1,2,'List-processing language'],[22,'D','ALGOL',5,21,1,2,'Algorithmic notation'],[23,'A','COBOL',18,13,1,1,'Business-friendly programming'],[24,'A','BASIC',1,19,1,1,'Beginner-friendly programming'],
+[6,'D','PASCAL',0,11,2,2,'Structured teaching language'],[7,'D','SMALLTALK',14,20,2,3,'Pure object-oriented language'],[8,'A','PROLOG',8,19,2,2,'Logic programming language'],[9,'A','SQL',10,4,2,1,'Database Query Language'],[10,'D','ADA',1,20,2,2,'Safety-critical systems language'],
+[25,'D','CPLUSPLUS',13,8,3,1,'Object-oriented successor to C (spell + as PLUS)'],[26,'A','PERL',4,1,3,2,'Text and patter processing'],[27,'A','HASKELL',5,5,3,3,'Lazy functional programming'],[28,'D','JAVA',9,1,3,1,'Write once, run everywhere'],[29,'D','DELPHI',16,17,3,2,'Rapid application development'],
+[11,'D','SCALA',0,23,4,2,'Object-oriented and functional blend'],[12,'A','RUST',2,9,4,1,'Memory-safe systems language'],[13,'D','KOTLIN',15,4,4,1,'Modern Android language'],[14,'A','TYPESCRIPT',14,6,4,2,'Typed JavaScript superset'],[15,'A','SWIFT',1,13,4,1,"Apple's Objective-C replacement"],
+[30,'D','CARBON',14,11,5,3,'Experimental C++ successor'],[31,'A','MOJO',16,3,5,3,'AI and high performance computing'],[32,'A','CRYSTAL',21,5,5,3,'Fast compiled applications'],[33,'A','ELIXIR',10,15,5,2,'Concurrent and scalable systems'],[34,'A','JULIA',19,1,5,2,'High-performance technical language'],
+[5,'D','ECMASCRIPT',3,17,6,3,'Standard that ended the Browser Wars'],[16,'D','OCAML',7,13,6,3,'OOP with compile-time checking'],[17,'A','SIMULA',21,16,6,3,'First object-oriented language'],[18,'A','SCHEME',7,1,6,2,'Minimalist Lisp Dialect'],[19,'D','PYTHON',14,14,6,1,'Readable general-purpose language'],[35,'A','COMPILER',11,8,6,1,'Source code translator'],[36,'D','INTERPRETER',1,15,6,2,'Runtime code translator'],[37,'D','RECURSION',4,9,6,2,'Self-calling technique'],[38,'D','GARBAGECOLLECTION',1,6,6,2,'Automatic memory management']];
+// checkpoints: one general statement per era, answered in order
+const CP=[['Early machines were programmed with punched ___, an idea borrowed from weaving looms.','cards'],['Programmers began replacing hand-written ___ language with high-level languages.','assembly'],['The invention of the ___ made affordable home computers possible.','microprocessor'],['The growth of the World Wide ___ created demand for new programming languages.','Web'],['Smartphones created a huge demand for mobile ___.','apps'],['Artificial ___ now helps developers write and review code.','intelligence'],['A step-by-step set of instructions for solving a problem is called an ___.','algorithm']];
+const DEC=['cables','cloud','pixels'];
+const T={
+welcome:['Welcome, programmer! 👋',`<p>Your goal: complete the <b>History of Computer Programming crossword</b>. Here is how it works:</p><ol><li><b>Checkpoint</b> (left): drag a word into the blank of each era statement. Right = the era unlocks. Wrong = the word turns red.</li><li><b>Clues</b> (right): unlocked clues appear with a 🟢 🟡 🔴 difficulty. Click a clue or a white cell, then type.</li><li><b>Gold bold cells</b> are special. Solving a word through one sends its letter to the <b>Hint Lab</b>.</li><li><b>Hint Lab</b>: a full word becomes a hint. Use it on a clue of matching difficulty to reveal letters.</li><li>You do <b>not</b> have to finish an era before unlocking the next one. Solve all 39 entries to win.</li></ol><p>The yellow-blue bar under the title always tells you what just happened. Reopen this guide any time with “How to play”.</p>`],
+cp:['Mechanic: Era checkpoints',`<p>Each era has one short statement with a blank. Drag a word from the <b>word bank</b> into the blank (on a phone: tap the word, then tap the blank).</p><p>🟢 Green = correct, the era unlocks and its clues appear.<br>🔴 Red = wrong. Try another word, or tap the blank to clear it. You cannot move to the next era until it is correct.</p>`],
+era:['ERA UNLOCKED!',`<p>The clues of that era are now in the <b>Clues</b> list on the right, and their cells on the grid turned white.</p><p>You can solve them now <b>or</b> go straight to the next checkpoint. Unlocked clues stay available, so you can come back to the ones that stump you.</p>`],
+sp:['Mechanic: special letters',`<p>You just solved a word that passes through a <b>gold bold cell</b>. That letter was sent to the <b>Hint Lab</b> (right panel).</p><p>Each Hint Lab slot shows which clue gives its letter (like “3-Across”) until it is collected. Fill every slot of a hint to complete its word.</p>`],
+hw:['Mechanic: hint words',`<p>You completed a hint word! It is a general programming word, not a crossword answer.</p><p>Its <b>length</b> decides which clues it can help:<br>🟢 4–5 letters → Simple clues, reveals 1 letter<br>🟡 6 letters → Moderate clues, reveals 2 letters<br>🔴 7+ letters → Difficult clues, reveals 3 letters</p><p>Press <b>Use hint</b> in the Hint Lab, then click an eligible (dashed) clue. Each hint works once, so choose wisely.</p>`],
+hint:['Choosing a clue',`<p>Eligible clues are now outlined with a dashed border in the Clues list. Click one to reveal its letters. If you click a clue of the wrong difficulty, nothing is used up. Press Cancel to back out.</p>`]};
+const M={},CE=E.map(()=>[]);
+E.forEach((e,i)=>{for(let k=0;k<e[2].length;k++){const r=e[3]+(e[1]=='D'?k:0),c=e[4]+(e[1]=='A'?k:0),y=r+','+c;(M[y]=M[y]||{L:e[2][k],es:[]}).es.push(i);CE[i].push(y)}});
+E.forEach(e=>M[e[3]+','+e[4]].n=e[0]);
+const HW=['CODE','LOOP','SYNTAX','BINARY','DATABASE','VARIABLE'],SP={};
+const era0=k=>Math.min(...M[k].es.map(i=>E[i][5]));
+const HG=HW.map(w=>({w,t:w.length<6?1:w.length==6?2:3,c:[...w].map(ch=>{const k=Object.keys(M).filter(k=>M[k].L==ch&&!SP[k]).sort((a,b)=>era0(a)-era0(b))[0];SP[k]=1;return k})}));
+const init=()=>({u:0,v:{},lk:{},used:{},seen:{},cpw:''});
+let S=init(),sel=null,dir='A',hs=null,msg='Welcome! Read the guide, then answer the first checkpoint on the left.',chk=0,pick=null,rc=0,dm=0,bn='',pq=[],pS,pC;
+try{const s=JSON.parse(localStorage.getItem('cwhist2'));if(s&&s.v)S=s}catch(e){}
+const sv=()=>{try{localStorage.setItem('cwhist2',JSON.stringify(S))}catch(e){}};
+const $=id=>document.getElementById(id);
+const unl=i=>E[i][5]<S.u,isS=i=>unl(i)&&CE[i].every(k=>S.v[k]==M[k].L);
+const play=k=>M[k]&&M[k].es.some(unl),cur=()=>{if(!sel)return -1;const u=M[sel].es.filter(unl);return u.find(i=>E[i][1]==dir)??u[0]??-1};
+const nm=i=>E[i][2]=='CPLUSPLUS'?'C++':E[i][2],lab=i=>E[i][0]+'-'+(E[i][1]=='A'?'Across':'Down');
+function tip(k){if(S.seen[k])return;S.seen[k]=1;pq.push(k);sv();showP()}
+function showP(){const p=$('pop');if(!pq.length){p.style.display='none';return}const[t,h]=T[pq[0]];p.innerHTML=`<div><h2>${t}</h2>${h}<button class="pri" onclick="pq.shift();showP()">Got it</button></div>`;p.style.display='flex'}
+function snap(){const s=new Set(),c=new Set();E.forEach((e,i)=>isS(i)&&s.add(i));HG.forEach((h,g)=>h.c.forEach((k,j)=>M[k].es.some(isS)&&c.add(g+'.'+j)));return[s,c]}
+function post(){const[s,c]=snap(),m=[],got=[];
+ [...s].filter(i=>!pS.has(i)).forEach(i=>m.push(`✔ ${lab(i)} solved: ${nm(i)}`));
+ HG.forEach((h,g)=>{h.c.forEach((k,j)=>{const id=g+'.'+j;if(c.has(id)&&!pC.has(id))got.push(M[k].L)});
+  if(h.c.every((k,j)=>c.has(g+'.'+j))&&!h.c.every((k,j)=>pC.has(g+'.'+j)))m.push(`🔑 HINT WORD DISCOVERED: ${h.w} (use it on ${DF[h.t]} clues)`)});
+ if(got.length)m.splice(1,0,'Letter'+(got.length>1?'s':'')+' collected for the Hint Lab: '+got.join(', '));
+ if(m.length)msg=m.join(' · ');
+ if(got.length)tip('sp');if(m.some(x=>x.startsWith('🔑')))tip('hw');pS=s;pC=c}
+function R(){
+ const n=E.filter((e,i)=>isS(i)).length,ci=cur(),hl=ci>=0?CE[ci]:[];
+ $('pg').innerHTML=`<div style="font-size:12px">Solved ${n}/${E.length} · Eras ${S.u}/7</div><div class="bar"><i style="width:${n/E.length*100}%"></i></div>`;
+ $('msg').textContent=msg;
+ $('cb').innerHTML=ci>=0?`<b>${lab(ci)}</b> <span class="df">${DF[E[ci][6]]}</span> ${E[ci][7]} <small>(${E[ci][2].length} letters)</small>`:(S.u?'Click a clue on the right or a white cell to start typing.':'All cells are locked. Answer the first checkpoint (left) to unlock the first clues.');
+ let g='';
+ for(let r=0;r<23;r++)for(let c=0;c<25;c++){const k=r+','+c,m=M[k];if(!m){g+='<div class="c e"></div>';continue}
+  const p=play(k),so=m.es.some(isS);
+  g+=`<div class="c ${p?'':'lk'} ${hl.includes(k)?'hl':''} ${k==sel?'sl':''} ${so?'ok':''} ${S.lk[k]?'rv':''} ${chk&&p&&S.v[k]&&S.v[k]!=m.L?'bd':''} ${SP[k]?'sp':''}" onclick="cc('${k}')">${m.n?`<small>${m.n}</small>`:''}${p?S.v[k]||'':''}</div>`}
+ $('g').innerHTML=g;
+ let L=`<div class="cd"><h3>Era checkpoints (${S.u}/7 done)</h3><div class="eras">${ER.map((e,i)=>`<span class="${i<S.u?'on':''} ${i==S.u?'cur':''}">${i<S.u?'🔓':'🔒'} ${e}</span>`).join('')}</div>${bn?`<div class="ban">ERA UNLOCKED!<br>${bn}<br>New crossword clues are now available.</div>`:''}`;
+ if(S.u<7)L+=`<div class="vl">Drag a word into the <b>current</b> blank (or tap a word, then tap the blank). 🟢 green = correct · 🔴 red = wrong, try again.</div>`;
+ CP.forEach((q,i)=>{const[a,b]=q[0].split('___'),d=i<S.u,ac=i==S.u;
+  const bl=d?`<span class="bl f">${q[1]}</span>`:ac?`<span class="bl ${S.cpw?'bad':''}" ondragover="event.preventDefault()" ondrop="dr(event)" onclick="bk()">${S.cpw||'&nbsp;'}</span>`:'<span class="bl lkd">🔒</span>';
+  L+=`<div class="st ${ac?'act':''} ${i>S.u?'fut':''}"><small>${i+1}. ${ER[i]}</small><br>${a}${bl}${b}</div>`});
+ if(S.u<7){const done=CP.slice(0,S.u).map(x=>x[1]);L+=`<div class="chips">${[...CP.map(x=>x[1]),...DEC].sort().filter(w=>!done.includes(w)).map(w=>`<span class="chip ${pick==w?'p':''} ${S.cpw==w?'bad':''}" draggable="true" ondragstart="event.dataTransfer.setData('text/plain','${w}')" onclick="pk('${w}')">${w}</span>`).join('')}</div>`}
+ else L+='<b>All eras unlocked.</b> Work through the remaining clues freely.';
+ $('L').innerHTML=L+'</div>';
+ let H=`<div class="cd"><h3>Hint Lab</h3><div class="vl" style="margin:0 0 8px"><b>How it works:</b> ① Solve clues that cross a <b>gold bold cell</b>. ② Its letter fills a slot below (empty slots name the clue that gives it). ③ A full word is a hint: press <b>Use hint</b>, then click a clue of the matching color to reveal letters. Longer hint = harder clues + more letters.</div>`;
+ HG.forEach((h,gi)=>{const col=h.c.map(k=>M[k].es.some(isS)),all=col.every(x=>x),u=S.used[gi];
+  H+=`<div class="hc"><span class="df">${DF[h.t]} clues · reveals ${h.t} letter${h.t>1?'s':''}</span><div class="sl2">${h.c.map((k,i)=>col[i]?`<b class="f">${M[k].L}</b>`:`<b title="Solve this clue to collect the letter">${M[k].es.map(j=>E[j][0]+E[j][1]).join('/')}</b>`).join('')}</div><div>`+(all?`<b>${h.w}</b> ${u?`<i>— used on ${u}</i>`:`<button class="pri" onclick="uh(${gi})">${hs===gi?'Cancel':'Use hint'}</button>`}`:`<span class="vl">${col.filter(x=>x).length}/${h.c.length} letters collected</span>`)+'</div></div>'});
+ H+=`</div><div class="cd"><h3>Clues</h3>${hs!==null?`<div class="ban">Hint ${HG[hs].w}: click a dashed ${DF[HG[hs].t]} clue.</div>`:''}`;
+ ER.forEach((e,ei)=>{H+=`<div class="er">${ei<S.u?'🔓':'🔒'} ${e}</div>`;
+  if(ei>=S.u){H+='<div class="vl">Locked — pass this era’s checkpoint to reveal its clues.</div>';return}
+  E.forEach((q,i)=>{if(q[5]!=ei)return;H+=`<div class="cl ${isS(i)?'s':''} ${i==ci?'on':''} ${hs!==null&&!isS(i)&&q[6]==HG[hs].t?'el':''}" onclick="ce(${i})"><b>${q[0]}${q[1]}</b><span class="df">${DF[q[6]]}</span><span>${q[7]} <small>(${q[2].length})</small></span></div>`})});
+ $('R').innerHTML=H+'</div>';
+ $('rs').textContent=rc?'Click again to confirm restart':'Restart Game';
+ $('md').style.display=n==E.length&&!dm?'flex':'none';
+}
+function cc(k){if(!play(k)){msg='That cell belongs to a locked era. Pass its checkpoint first.';R();return}const u=M[k].es.filter(unl);if(sel==k){const o=u.find(i=>E[i][1]!=dir);if(o!==undefined){dir=E[o][1];msg='Direction switched to '+(dir=='A'?'Across':'Down')+'.'}}else{sel=k;if(!u.some(i=>E[i][1]==dir))dir=E[u[0]][1];msg=''}$('hi').focus({preventScroll:true});R()}
+function ce(i){if(hs!==null){const h=HG[hs];
+  if(!unl(i))msg='That clue is still locked.';else if(isS(i))msg=`${lab(i)} is already solved. Pick an unsolved clue.`;
+  else if(E[i][6]!=h.t)msg=`${lab(i)} is ${DF[E[i][6]]}, but ${h.w} only helps ${DF[h.t]} clues. Hint NOT used.`;
+  else{const ks=CE[i].filter(k=>S.v[k]!=M[k].L).slice(0,h.t);ks.forEach(k=>{S.v[k]=M[k].L;S.lk[k]=1});S.used[hs]=E[i][0]+E[i][1];msg=`Hint ${h.w} used on ${lab(i)}: revealed ${ks.length} letter${ks.length>1?'s':''} (shown in blue, locked).`;hs=null;sv();post()}
+  R();return}
+ if(!unl(i)){msg='That clue is locked. Pass its era checkpoint first.';R();return}
+ dir=E[i][1];sel=CE[i].find(k=>S.v[k]!=M[k].L)||CE[i][0];msg='';$('hi').focus({preventScroll:true});R()}
+function uh(g){if(hs===g){hs=null;msg='Hint cancelled — not used.'}else{if(!E.some((q,i)=>unl(i)&&!isS(i)&&q[6]==HG[g].t)){msg=`No unsolved ${DF[HG[g].t]} clue is unlocked right now. Hint kept.`;R();return}hs=g;msg=`Now click a dashed ${DF[HG[g].t]} clue to use ${HG[g].w}.`;tip('hint')}R()}
+function ty(ch){const i=cur();if(i<0)return;chk=0;msg='';if(!M[sel].es.some(isS)&&!S.lk[sel])S.v[sel]=ch;else msg='That letter is locked (solved or revealed).';const a=CE[i],x=a.indexOf(sel);if(x<a.length-1)sel=a[x+1];
+ else if(!isS(i)&&a.every(k=>S.v[k]))msg=`${lab(i)} is full but not correct yet. Press "Check my letters" or fix a crossing word.`;
+ sv();post();R()}
+function bs(){const i=cur();if(i<0)return;chk=0;const ok=k=>!M[k].es.some(isS)&&!S.lk[k];if(ok(sel)&&S.v[sel])delete S.v[sel];else{const a=CE[i],x=a.indexOf(sel);if(x>0){sel=a[x-1];if(ok(sel))delete S.v[sel]}}sv();R()}
+function mv(dr,dc){if(!sel)return;let[r,c]=sel.split(',').map(Number);for(let t=0;t<25;t++){r+=dr;c+=dc;const k=r+','+c;if(play(k)){sel=k;break}}R()}
+$('hi').addEventListener('keydown',e=>{const k=e.key;if(/^[a-z]$/i.test(k)){e.preventDefault();ty(k.toUpperCase())}else if(k=='Backspace'){e.preventDefault();bs()}else if(k.startsWith('Arrow')){e.preventDefault();mv(k=='ArrowDown'?1:k=='ArrowUp'?-1:0,k=='ArrowRight'?1:k=='ArrowLeft'?-1:0)}});
+$('hi').addEventListener('input',e=>{const m=e.target.value.match(/[a-z]/ig);e.target.value='';if(m)ty(m.pop().toUpperCase())});
+function put(w){if(S.u>=7)return;pick=null;bn='';
+ if(w.toLowerCase()==CP[S.u][1].toLowerCase()){const e=S.u;S.u++;S.cpw='';bn=ER[e];post();msg=`✔ Correct! ${ER[e]} unlocked — its clues are on the right.`+(S.u<7?` Next: ${ER[S.u]} checkpoint.`:' All eras unlocked!');tip('era')}
+ else{S.cpw=w;msg=`✘ "${w}" is wrong (red). Try another word — ${ER[S.u]} stays locked until it is right.`}
+ sv();R()}
+function dr(e){e.preventDefault();put(e.dataTransfer.getData('text/plain'))}
+function pk(w){pick=pick==w?null:w;msg=pick?`Selected "${w}". Now tap the blank.`:'';R()}
+function bk(){if(pick)put(pick);else if(S.cpw){S.cpw='';msg='Blank cleared.';R()}}
+$('ck').onclick=()=>{chk=1;msg='Letters marked red do not match the answer. Correct words turn green on their own.';R()};
+$('hp').onclick=()=>{pq=['welcome'];showP()};
+$('rs').onclick=()=>{if(!rc){rc=1;msg='Press Restart again within 4 seconds to erase all progress.';R();setTimeout(()=>{rc=0;R()},4000);return}S=init();sel=null;hs=null;bn='';dm=0;rc=0;chk=0;pick=null;pq=[];msg='Game reset. Good luck!';sv();[pS,pC]=snap();tip('welcome');tip('cp');R()};
+[pS,pC]=snap();tip('welcome');tip('cp');R();
+</script></body></html>
